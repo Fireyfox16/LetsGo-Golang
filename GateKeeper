@@ -1,7 +1,28 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"time"
+)
 
 func main() {
-	fmt.Println("Welkom bij Fonteyn Vakantieparken")
+	if currentGroet() == "" {
+		fmt.Println("Sorry, de parkeerplaats is ’s nachts gesloten")
+	} else {
+		fmt.Println(currentGroet() + "! Welkom bij Fonteyn Vakantieparken")
+	}
+}
+
+func currentGroet() string {
+	var groet string
+	currentHour := time.Now().Hour()
+	switch {
+	case 7 <= currentHour && currentHour < 12:
+		groet = "Goedemorgen"
+	case 12 <= currentHour && currentHour < 18:
+		groet = "Goedemiddag"
+	case 18 <= currentHour && currentHour < 23:
+		groet = "Goedenavond"
+	}
+	return groet
 }
