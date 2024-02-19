@@ -2,14 +2,32 @@ package main
 
 import (
 	"fmt"
+	"strings"
 	"time"
 )
 
 func main() {
-	if currentGroet() == "" {
-		fmt.Println("Sorry, de parkeerplaats is ’s nachts gesloten")
+	var kenteken string
+	fmt.Println("Voer je kenteken in alsjeblieft:")
+	fmt.Scanln(&kenteken)
+	kenteken = strings.ToUpper(kenteken)
+	if kentekenCheck(kenteken) {
+		if currentGroet() == "" {
+			fmt.Println("Sorry, de parkeerplaats is ’s nachts gesloten")
+		} else {
+			fmt.Println(currentGroet() + "! Welkom bij Fonteyn Vakantieparken")
+		}
 	} else {
-		fmt.Println(currentGroet() + "! Welkom bij Fonteyn Vakantieparken")
+		fmt.Println("U heeft helaas geen toegang tot het parkeerterrein")
+	}
+}
+
+func kentekenCheck(kenteken string) bool {
+	switch kenteken {
+	case "95HKX8", "GB293K", "ATBL30", "01ABC2":
+		return true
+	default:
+		return false
 	}
 }
 
